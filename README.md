@@ -1,4 +1,4 @@
-# threedemo
+# three.js学习
 
 > a demo for three.js
 
