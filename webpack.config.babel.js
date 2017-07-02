@@ -5,22 +5,29 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = {
     entry: path.join(__dirname, 'src'),
     output: {
-        path: __dirname,
-        filename: 'dist/bunble.js'
+        path: path.join(__dirname, 'build'),
+        filename: 'bundle.js'
     },
     devServer: {
         inline: true,
         port: 2000
     },
     module: {
-        loaders: [{
+        loaders: [
+        {
             test: /\.jsx?$/,
             loader: 'babel-loader',
             include: path.join(__dirname, 'src'),
+            exclude: path.join(__dirname, 'node_modules'),
             query: {
                 presets: ['es2015']
             }
-        }]
+        },
+        {
+            test: /\.(gif|jpg|png|woff|svg|eot|ttf)\??.*$/,
+            loader: 'url-loader?limit=8192&name=assets/[name].[ext]'
+        }
+        ]
     },
     plugins: [
         new HtmlWebpackPlugin({
